@@ -1,0 +1,9 @@
+# robots.txt · idepsur.org
+
+User-agent: *
+Allow: /
+
+# Página posterior al aporte: no debe aparecer en buscadores.
+Disallow: /gracias.html
+
+Sitemap: https://idepsur.org/sitemap.xml

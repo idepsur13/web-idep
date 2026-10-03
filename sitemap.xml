@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Mapa del sitio · idepsur.org
+
+  No incluye gracias.html: es la página posterior al aporte y lleva
+  noindex de forma permanente.
+
+  Recordatorio: mientras las páginas conserven su <meta name="robots"
+  content="noindex, nofollow">, Google no las indexará aunque estén
+  listadas aquí. Ese meta se borra el día del lanzamiento.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://idepsur.org/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://idepsur.org/proyectos-investigacion.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://idepsur.org/autogestion-donativos.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://idepsur.org/privacidad.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>
