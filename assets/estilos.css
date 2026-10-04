@@ -597,28 +597,37 @@ form textarea{min-height:140px; resize:vertical}
   line-height:1; display:block; flex:0 0 auto}
 /* Mismos números (imagen) que Objetivos estratégicos, a tamaño de
    insignia de tarjeta. */
-.paquete .n img{width:22px; height:auto; display:block}
+.paquete .n img{width:18px; height:auto; display:block}
 /* Una sola línea en los tres paquetes. En celular las tarjetas van en una
-   columna y sobra sitio, así que el título mantiene su tamaño holgado. */
-.paquete h3{font-size:1.12rem; margin:0; text-transform:uppercase;
+   columna y sobra sitio, así que el título mantiene su tamaño holgado.
+   Los límites van en px, no en rem: el ancho de la tarjeta no depende del
+   tamaño de fuente base del navegador, así que atarlos a rem haría que el
+   título se saliera justo en quienes lo tienen más grande. */
+.paquete h3{font-size:clamp(13px,4.4vw,20px); margin:0; text-transform:uppercase;
   letter-spacing:.02em; text-align:center; white-space:nowrap}
 /* En escritorio son tres columnas y manda el título más largo ("Paquete
-   Investigador"): el tamaño acompaña al ancho, pero se detiene en
-   1.12rem porque pasados los 1180px el contenedor deja de ensancharse y
-   la tarjeta ya no gana sitio. */
+   Investigador"): el tamaño acompaña al ancho, pero se detiene en 20px
+   porque pasados los 1180px el contenedor deja de ensancharse y la
+   tarjeta ya no gana sitio. */
 @media (min-width:901px){
-  .paquete h3{font-size:clamp(.86rem,1.5vw,1.12rem)}
+  .paquete h3{font-size:clamp(14px,1.55vw,20px)}
 }
 /* Franja estrecha con tres columnas ya activas: las tarjetas ceden algo
    de relleno lateral para que el título más largo siga entrando entero. */
 @media (min-width:901px) and (max-width:1100px){
   .paquete{padding-left:18px; padding-right:18px}
 }
-.paquetes article:nth-child(1) h3{color:#D99B70}
-.paquetes article:nth-child(2) h3{color:#5C8C6E}
-.paquetes article:nth-child(3) h3{color:#7B5EA7}
-.paquete .precio{font-family:var(--sans); font-size:.74rem; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--tinta-suave); font-weight:600; margin:0 0 18px}
+/* Cada paquete tiene su color, y el precio lo repite para que se lean
+   como una sola unidad. */
+.paquetes article:nth-child(1) h3,
+.paquetes article:nth-child(1) .precio{color:#4a4a4a}
+.paquetes article:nth-child(2) h3,
+.paquetes article:nth-child(2) .precio{color:#5C8C6E}
+.paquetes article:nth-child(3) h3,
+.paquetes article:nth-child(3) .precio{color:#7B5EA7}
+.paquete .precio{font-family:var(--serif); font-size:clamp(1.9rem,2.5vw,2.35rem);
+  line-height:1.1; letter-spacing:0; text-transform:none; font-weight:400;
+  text-align:center; margin:2px 0 18px}
 .paquete .incluye{font-family:var(--sans); font-size:.72rem; letter-spacing:.1em;
   text-transform:uppercase; color:var(--azul); margin:0 0 10px; font-weight:600}
 .paquete ul{margin:0 0 22px; padding-left:18px; color:var(--tinta-suave);
