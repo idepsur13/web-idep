@@ -593,11 +593,19 @@ form textarea{min-height:140px; resize:vertical}
   box-shadow:0 26px 50px -38px rgba(18,35,63,.55)}
 /* El número y el título del paquete van en la misma línea. */
 .paquete .cab-paquete{display:flex; align-items:center; justify-content:center; gap:10px; margin:0 0 6px}
-.paquete .n{font-family:var(--num); font-size:1.6rem; color:#404040;
-  line-height:1; display:block; flex:0 0 auto}
-/* Mismos números (imagen) que Objetivos estratégicos, a tamaño de
-   insignia de tarjeta. */
-.paquete .n img{width:18px; height:auto; display:block}
+/* El número es el mismo dibujo que en Objetivos estratégicos, pero aquí va
+   como máscara en vez de <img>: el archivo es un trazo plano (#404040)
+   sobre transparente, así que recortarlo sobre un fondo de color permite
+   teñirlo con el color exacto de cada paquete, cosa que una <img> no
+   admite. El color lo hereda de `currentColor` (ver nth-child más abajo).
+   Las rutas van en esta hoja, no en una variable del HTML: dentro de una
+   custom property la url() se resolvería contra este archivo igualmente y
+   acabaría duplicando el /assets/. */
+.paquete .n{width:18px; height:18px; display:block; flex:0 0 auto;
+  background-color:currentColor;
+  -webkit-mask-position:center; mask-position:center;
+  -webkit-mask-size:contain; mask-size:contain;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat}
 /* Una sola línea en los tres paquetes. En celular las tarjetas van en una
    columna y sobra sitio, así que el título mantiene su tamaño holgado.
    Los límites van en px, no en rem: el ancho de la tarjeta no depende del
@@ -620,11 +628,23 @@ form textarea{min-height:140px; resize:vertical}
 /* Cada paquete tiene su color, y el precio lo repite para que se lean
    como una sola unidad. */
 .paquetes article:nth-child(1) h3,
-.paquetes article:nth-child(1) .precio{color:#4a4a4a}
+.paquetes article:nth-child(1) .precio,
+.paquetes article:nth-child(1) .n{color:#4a4a4a}
 .paquetes article:nth-child(2) h3,
-.paquetes article:nth-child(2) .precio{color:#5C8C6E}
+.paquetes article:nth-child(2) .precio,
+.paquetes article:nth-child(2) .n{color:#5C8C6E}
 .paquetes article:nth-child(3) h3,
-.paquetes article:nth-child(3) .precio{color:#7B5EA7}
+.paquetes article:nth-child(3) .precio,
+.paquetes article:nth-child(3) .n{color:#7B5EA7}
+.paquetes article:nth-child(1) .n{
+  -webkit-mask-image:url('img/numero1-objetivos-estrategicos.webp');
+  mask-image:url('img/numero1-objetivos-estrategicos.webp')}
+.paquetes article:nth-child(2) .n{
+  -webkit-mask-image:url('img/numero2-objetivos-estrategicos.webp');
+  mask-image:url('img/numero2-objetivos-estrategicos.webp')}
+.paquetes article:nth-child(3) .n{
+  -webkit-mask-image:url('img/numero3-objetivos-estrategicos.webp');
+  mask-image:url('img/numero3-objetivos-estrategicos.webp')}
 /* Sorts Mill Goudy trae cifras elzevirianas por defecto: el 0 y el 2 van a
    la altura de la x mientras el 5 y el 7 bajan de la línea base, así que
    $25, $50 y $75 se veían desparejos. `lining-nums` pide las cifras de
@@ -686,6 +706,12 @@ form textarea{min-height:140px; resize:vertical}
 .franja img{width:100%; height:clamp(150px,18vw,230px); object-fit:cover; opacity:.92}
 .franja figcaption{padding:12px clamp(18px,4vw,26px) 0; max-width:var(--ancho);
   margin:0 auto; text-align:center}
+/* Las franjas de Bandurria van pegadas al pie, que también es marino, así
+   que su fondo oscuro encaja. La de Yumbos queda entre dos secciones
+   claras: ahí la banda marino desentona y el pie de foto debe leerse como
+   los demás del sitio. */
+.franja.franja-clara{background:transparent}
+.franja.franja-clara figcaption{color:var(--tinta-suave)}
 
 /* ---------- CORRECCIÓN 23 · Pie ---------- */
 .pie{background:var(--marino); color:#a9bdd6;
