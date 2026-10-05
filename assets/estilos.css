@@ -625,8 +625,14 @@ form textarea{min-height:140px; resize:vertical}
 .paquetes article:nth-child(2) .precio{color:#5C8C6E}
 .paquetes article:nth-child(3) h3,
 .paquetes article:nth-child(3) .precio{color:#7B5EA7}
+/* Sorts Mill Goudy trae cifras elzevirianas por defecto: el 0 y el 2 van a
+   la altura de la x mientras el 5 y el 7 bajan de la línea base, así que
+   $25, $50 y $75 se veían desparejos. `lining-nums` pide las cifras de
+   caja alta, todas a la misma altura. El font-feature-settings queda de
+   respaldo para navegadores que no entiendan la propiedad moderna. */
 .paquete .precio{font-family:var(--serif); font-size:2.4rem;
   line-height:1.1; letter-spacing:0; text-transform:none; font-weight:bold;
+  font-variant-numeric:lining-nums; font-feature-settings:"lnum" 1;
   text-align:center; margin:2px 0 18px}
 .paquete .incluye{font-family:var(--sans); font-size:.72rem; letter-spacing:.1em;
   text-transform:uppercase; color:var(--azul); margin:0 0 10px; font-weight:600}
