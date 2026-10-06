@@ -1,0 +1,983 @@
+/* =====================================================================
+   IDEP · Hoja de estilos compartida.
+   Reconstruida desde index-original.html con las 24 correcciones.
+   La usan: index.html, proyectos-investigacion.html,
+   autogestion-donativos.html, gracias.html y privacidad.html.
+   ===================================================================== */
+
+:root{
+  --marino:#12233f;
+  --marino-2:#1b3357;
+  --azul:#2f5c8f;
+  --azul-claro:#5b86b8;
+  --celeste:#e4edf5;
+  --celeste-2:#f2f7fb;
+  --blanco:#ffffff;
+  --tinta:#16202e;
+  --tinta-suave:#4a5768;
+  --linea:rgba(18,35,63,.14);
+  --serif:'Sorts Mill Goudy','Iowan Old Style',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --num:'Bodoni Moda',Didot,'Times New Roman',serif;
+  --cursiva:'EB Garamond',Georgia,serif;
+  --ancho:1180px;
+  --logo:46px;          /* casi el alto del botón del menú */
+  --cab:62px;           /* logo/botón (46) + 8 arriba + 8 abajo */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:calc(var(--cab) + 10px)}
+body{
+  margin:0; background:var(--blanco); color:var(--tinta);
+  font-family:var(--serif); font-size:19px; line-height:1.72;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img{max-width:100%; height:auto; display:block}
+a{color:inherit}
+.wrap{width:100%; max-width:var(--ancho); margin:0 auto; padding:0 clamp(18px,4vw,26px)}
+
+/* ---------- Tipografía ---------- */
+h1,h2,h3,h4{font-weight:400; line-height:1.14; margin:0; letter-spacing:-.01em}
+h2{font-size:clamp(1.9rem,4vw,3rem)}
+h3{font-size:clamp(1.3rem,2.2vw,1.7rem)}
+
+/* CORRECCIÓN 9 · rótulo de sección en Sorts Mill Goudy, mayúsculas y algo mayor */
+.kicker{
+  font-family:var(--serif); font-size:clamp(.85rem,3.2vw,1.15rem);
+  letter-spacing:clamp(.08em,.6vw,.18em); text-transform:uppercase;
+  color:var(--azul); margin:0 0 16px; font-weight:400;
+}
+.kicker.claro{color:var(--azul-claro)}
+.lead{font-size:clamp(1.08rem,1.6vw,1.3rem); color:var(--tinta-suave); line-height:1.68}
+
+/* ---------- Palabras resaltadas ----------
+   .resalte-bold: negrita; el color de cada palabra va aparte, inline
+   por palabra (cada una tiene su propio color pedido). .resalte y
+   .resalte-claro quedan de respaldo por si algo no se migró. */
+.resalte{color:#a8c8e8}
+.resalte-claro{color:#2f5c8f}
+.resalte-bold{font-weight:700}
+
+/* Pies de foto · estructura fija en todo el sitio:
+   <span class="pie-titulo">TÍTULO.</span> <em>texto descriptivo</em>
+   El título va en mayúsculas y SIN cursiva; el texto va en cursiva. */
+figure{margin:0}
+figcaption,.pie-foto{
+  font-family:var(--cursiva); font-style:normal; font-size:.95rem;
+  color:var(--tinta-suave); margin-top:12px; line-height:1.5; letter-spacing:0;
+}
+.pie-titulo{font-style:normal; text-transform:uppercase; letter-spacing:.02em}
+figcaption em,.pie-foto em{font-style:italic}
+section.marino figcaption,.franja figcaption{color:#b9cbe1}
+
+/* ---------- CORRECCIÓN 1 · Barra superior ---------- */
+.barra-apoyo{
+  background:var(--marino); color:#e9f0f8; font-family:var(--sans);
+  font-size:.85rem; letter-spacing:.01em;
+}
+.barra-apoyo .wrap{
+  display:flex; align-items:center; justify-content:center; gap:18px;
+  flex-wrap:wrap; padding-top:11px; padding-bottom:11px; text-align:center;
+}
+.barra-apoyo strong{font-weight:600; color:#fff}
+.barra-apoyo a{
+  color:#fff; text-decoration:none; border:1px solid rgba(255,255,255,.5);
+  padding:6px 17px; border-radius:2px; font-size:.79rem; letter-spacing:.11em;
+  text-transform:uppercase; white-space:nowrap; transition:background .25s,border-color .25s;
+}
+.barra-apoyo a:hover{background:#fff; color:var(--marino); border-color:#fff}
+/* Las tres frases son <span> separados: en escritorio van seguidos,
+   en celular cada uno cae en su propia línea (ver responsive). */
+.barra-apoyo .frase{display:inline}
+.barra-apoyo .frase + .frase{margin-left:.35em}
+
+/* ---------- CORRECCIONES 2 y 3 · Cabecera ---------- */
+.cabecera{
+  position:sticky; top:0; z-index:60; background:rgba(255,255,255,.96);
+  backdrop-filter:saturate(160%) blur(9px); border-bottom:1px solid var(--linea);
+  transition:box-shadow .3s;
+  --cab-color:var(--tinta);
+}
+.cabecera.fija{box-shadow:0 8px 26px -22px rgba(18,35,63,.55)}
+.cabecera .wrap{display:flex; align-items:center; justify-content:space-between;
+  gap:20px; height:var(--cab)}
+/* El logo claro y el oscuro ocupan la misma celda (grid-area 1/1) y se
+   cruzan con opacidad; cuál se ve depende de --cab-color (ver más abajo,
+   punto 1 de la cabecera transparente, solo activo en escritorio). */
+.marca{display:grid; align-items:center}
+.marca img{grid-area:1/1; height:var(--logo); width:auto; transition:opacity .35s ease}
+.marca .logo-claro{opacity:0; pointer-events:none}
+.btn-menu{display:flex; align-items:center; justify-content:center; background:none;
+  cursor:pointer; border:1px solid var(--linea); border-radius:2px;
+  width:46px; height:46px; color:var(--cab-color); padding:0; flex:0 0 auto;
+  transition:color .35s ease}
+.btn-menu:hover{border-color:var(--azul); color:var(--azul)}
+/* El menú de 4 títulos (submenú desplegable) es exclusivo de escritorio;
+   en celular no se ve. Se reactiva en el bloque de 1024px más abajo. */
+.nav-desk{display:none}
+.barras{display:inline-flex; flex-direction:column; gap:4px; width:20px}
+.barras i{height:1.5px; background:currentColor; display:block;
+  transition:transform .3s,opacity .3s}
+.abierto .barras i:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.abierto .barras i:nth-child(2){opacity:0}
+.abierto .barras i:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+/* ---------- Menú desplegable (mockup-menu.html) ---------- */
+.velo{position:fixed; inset:0; background:rgba(10,20,36,.45); opacity:0; visibility:hidden;
+  transition:opacity .3s,visibility .3s; z-index:55}
+.velo.on{opacity:1; visibility:visible}
+.panel{position:fixed; top:0; right:0; z-index:70; width:min(430px,100%);
+  height:100dvh; max-height:100dvh; background:#fff; transform:translateX(100%);
+  transition:transform .35s ease; display:flex; flex-direction:column;
+  box-shadow:-20px 0 60px -30px rgba(18,35,63,.6)}
+.panel.on{transform:none}
+/* La cabecera del panel nunca se encoge: el botón de cerrar queda
+   siempre visible aunque la lista sea más alta que la pantalla. */
+.panel-cab{flex:0 0 auto; display:flex; align-items:center; justify-content:space-between;
+  padding:0 24px; min-height:var(--cab); border-bottom:1px solid var(--linea); background:#fff}
+.panel-cab span{font-family:var(--sans); font-size:.72rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--tinta-suave); font-weight:600}
+.cerrar{background:none; border:1px solid var(--linea); border-radius:2px; cursor:pointer;
+  width:40px; height:40px; font-size:1.2rem; line-height:1; color:var(--tinta); flex:0 0 auto}
+.cerrar:hover{border-color:var(--azul); color:var(--azul)}
+/* El cuerpo es lo único que se desplaza. */
+.panel-cuerpo{flex:1 1 auto; min-height:0; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  padding:4px 24px calc(18px + env(safe-area-inset-bottom))}
+/* Espaciado ajustado para que las diez secciones entren sin desplazar,
+   tanto en computadora como en celular. */
+.panel a.item{display:block; text-decoration:none; padding:11px 0;
+  border-bottom:1px solid var(--linea); font-size:1rem;
+  text-transform:uppercase; letter-spacing:.06em; line-height:1.3}
+.panel a.item:hover{color:var(--azul)}
+.panel a.item[aria-current="page"]{color:var(--azul)}
+/* Grupo "Explorar": páginas separadas, con flecha hacia afuera */
+.grupo-otras{margin-top:4px; padding-top:14px; position:relative}
+.grupo-otras::before{content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:var(--linea)}
+.grupo-otras .rotulo{font-family:var(--sans); font-size:.68rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--azul-claro); margin:0 0 2px; font-weight:600}
+.panel a.externo{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.panel a.externo svg{flex:0 0 auto; width:15px; height:15px; opacity:.55}
+.panel a.externo:hover svg{opacity:1}
+@media (max-height:480px){
+  .panel-cab{min-height:54px}
+  .panel a.item{padding:11px 0; font-size:.95rem}
+}
+
+/* ---------- CORRECCIONES 4 y 5 · Portada ---------- */
+.portada{position:relative; padding:0;
+  min-height:clamp(460px,calc(86vh - var(--cab)),660px);
+  display:flex; align-items:center; overflow:hidden; background:var(--marino)}
+.portada-fondo{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:.62; will-change:transform}
+.portada::after{content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(18,35,63,.55) 0%,rgba(18,35,63,.25) 42%,rgba(18,35,63,.93) 100%)}
+/* Menos relleno arriba que abajo: el bloque queda ópticamente centrado
+   o apenas por encima del centro, sin aire de más por encima del título. */
+.portada .wrap{position:relative; z-index:2; color:#fff;
+  padding-top:clamp(26px,3.5vw,44px); padding-bottom:clamp(44px,6vw,76px)}
+/* Tamaño reducido un 15% respecto al original clamp(1.9rem,5vw,3.9rem).
+   line-height más generoso (en vez de 1.22) para que las tres líneas
+   queden a la misma distancia entre sí: IDEP es más grande que el resto
+   y, si no, su propia línea quedaría con más aire que las otras dos. */
+.portada h1{font-size:clamp(1.615rem,4.25vw,3.315rem); max-width:26ch;
+  letter-spacing:.045em; line-height:1.45}
+/* IDEP domina el título: 30% más grande, negrita y en verde intermedio,
+   sin línea decorativa ni subrayado. line-height:1 en el propio <strong>
+   para que no sume más aire encima del que ya da el line-height del h1. */
+.portada h1 strong{
+  display:inline-block; white-space:nowrap;
+  font-weight:700; color:#fff; font-size:1em; line-height:1;
+}
+.portada .sub{max-width:56ch; margin-top:20px; font-size:clamp(1.02rem,1.6vw,1.28rem);
+  color:#dce7f3; font-style:italic; line-height:1.6}
+
+/* ---------- Portada corta de las páginas interiores ---------- */
+.portada-int{background:var(--marino); color:#fff; padding:clamp(40px,5.5vw,70px) 0}
+.portada-int h1{font-size:clamp(1.7rem,4vw,2.9rem); line-height:1.16; max-width:22ch;
+  letter-spacing:.02em}
+.portada-int .kicker{color:var(--azul-claro)}
+.portada-int p{color:#c4d4e6; max-width:60ch; margin-top:18px}
+
+/* ---------- Botones ---------- */
+.acciones{display:flex; gap:14px; flex-wrap:wrap; margin-top:30px}
+.btn{display:inline-flex; align-items:center; justify-content:center; min-height:44px;
+  font-family:var(--sans); font-size:.76rem; letter-spacing:.13em;
+  text-transform:uppercase; font-weight:600; text-decoration:none; padding:12px 26px;
+  border-radius:2px; border:0; cursor:pointer;
+  transition:transform .25s ease,background .25s ease,color .25s ease,box-shadow .25s ease}
+/* Todos los botones ganan la misma sombra azul sutil al pasar el cursor.
+   El cambio de fondo #2f5c8f→#12233f solo aplica tal cual al botón que
+   ya es azul (.btn-azul); a los demás (blanco sobre el hero, con borde,
+   de línea) forzarles ese mismo fondo los haría perder contraste o
+   confundirse con su propio fondo, así que conservan su propio cambio
+   de color y solo suman la sombra. */
+.btn:hover{box-shadow:0 4px 12px rgba(47,92,143,.4)}
+.btn-solido{background:#fff; color:var(--marino)}
+.btn-solido:hover{transform:translateY(-2px)}
+.btn-linea{border:1px solid rgba(255,255,255,.55); color:#fff}
+.btn-linea:hover{background:rgba(255,255,255,.12); transform:translateY(-2px)}
+.btn-azul{background:var(--azul); color:#fff}
+.btn-azul:hover{background:var(--marino); transform:translateY(-2px)}
+.btn-borde{border:1px solid var(--linea); color:var(--azul)}
+.btn-borde:hover{border-color:var(--azul); background:var(--celeste-2)}
+.btn[disabled],.btn.inactivo{opacity:.45; cursor:not-allowed; pointer-events:none}
+
+/* ---------- Secciones ---------- */
+section{padding:clamp(56px,7vw,104px) 0}
+section.celeste{background:var(--celeste-2)}
+section.marino{background:var(--marino); color:#e8eff7}
+section.marino h2,section.marino h3{color:#fff}
+section.marino .lead{color:#c4d4e6}
+.cab-seccion{max-width:64ch; margin-bottom:clamp(32px,4vw,52px)}
+.cab-seccion .lead{margin-top:20px}
+/* CORRECCIÓN 15 · subtítulo del mismo tamaño que el título */
+.sub-titulo{font-size:clamp(1.9rem,4vw,3rem); line-height:1.14; margin:4px 0 0;
+  color:var(--tinta-suave)}
+section.marino .sub-titulo{color:#bed0e4}
+
+/* ---------- Quiénes somos ---------- */
+.dos-col{display:grid; grid-template-columns:1.15fr .85fr;
+  gap:clamp(30px,5vw,66px); align-items:center}
+/* Imagen ~22% más chica que antes (dentro del 20-25% pedido), centrada
+   en su columna. */
+.dos-col figure{overflow:hidden; border-radius:2px; max-width:78%; margin:0 auto}
+.dos-col img{border-radius:2px; transition:transform .3s ease}
+.dos-col figure:hover img{transform:scale(1.03)}
+
+/* ---------- CORRECCIÓN 12 · Valores ----------
+   Fondo con foto de Pomasqui y capa marino al 82% para que el blanco
+   del texto y los íconos (invertidos por filtro) queden legibles. */
+#valores{
+  position:relative; color:#fff;
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/pomasqui.jpg');
+  background-size:cover; background-position:center;
+}
+#valores .kicker{color:var(--azul-claro)}
+#valores h2{color:#fff}
+.valores{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:8px}
+.valor{background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.24); border-radius:2px;
+  padding:30px 26px 32px; text-align:center;
+  opacity:0; transform:scale(.9);
+  transition:opacity .6s ease,transform .6s ease,box-shadow .3s,border-color .3s}
+/* Al entrar en pantalla (clase que pone menu.js con 80ms de retraso entre
+   tarjetas) aparecen con fade + zoom. El hover se conserva redeclarando la
+   transición a .3s una vez ya visibles. */
+.valor.valor-in{opacity:1; transform:none}
+.valor.valor-in:hover{transform:translateY(-4px); box-shadow:0 22px 44px -30px rgba(0,0,0,.5);
+  border-color:#fff; transition:transform .3s,box-shadow .3s,border-color .3s}
+@media (prefers-reduced-motion:reduce){
+  .valor{opacity:1; transform:none; transition:none}
+  .valor.valor-in:hover{transform:none}
+}
+/* PARTE 2.3 · los tres íconos a la misma medida.
+   La caja es fija y el dibujo se ajusta dentro sin deformarse. El filtro
+   los vuelve blancos para que se lean sobre el fondo oscuro. */
+.valor .icono{width:64px; height:64px; margin:0 auto 14px;
+  display:flex; align-items:center; justify-content:center}
+.valor .icono img{max-width:100%; max-height:100%; width:auto; object-fit:contain;
+  filter:brightness(0) invert(1); transition:transform .25s ease,filter .25s ease}
+.valor:hover .icono img{
+  transform:translateY(-4px);
+  filter:brightness(0) invert(1) drop-shadow(0 0 8px rgba(168,200,232,.7));
+}
+.valor .num{font-family:var(--num); font-size:1.5rem; color:var(--azul-claro);
+  display:block; line-height:1; margin-bottom:8px}
+.valor h3{margin:0 0 10px; font-size:1.3rem; color:#fff}
+.valor p{margin:0; color:#dce7f3; font-size:1rem; line-height:1.65}
+
+/* ---------- CORRECCIÓN 13 · Objetivos estratégicos ----------
+   Fondo BLANCO (no celeste), números grandes en Bodoni Moda
+   centrados verticalmente respecto al texto. */
+.bloque{display:grid; gap:clamp(24px,4vw,56px); align-items:center;
+  grid-template-columns:1.25fr .75fr}
+.bloque + .bloque{margin-top:clamp(40px,5vw,72px)}
+.bloque.invertido{grid-template-columns:.75fr 1.25fr}
+.bloque.invertido .pieza{order:-1}
+.objetivo{display:flex; gap:clamp(16px,2vw,26px); align-items:center}
+.objetivo + .objetivo{margin-top:clamp(22px,2.6vw,34px)}
+/* Los números son imágenes (numeroN-objetivos-estrategicos.webp),
+   centradas verticalmente respecto a su texto. */
+.objetivo .n{flex:0 0 auto; width:clamp(46px,6vw,76px);
+  display:flex; align-items:center; justify-content:center}
+.objetivo .n img{width:100%; height:auto}
+.objetivo p{margin:0; font-size:1.03rem; line-height:1.6; color:var(--tinta);
+  text-align:justify; hyphens:auto}
+.pieza img{width:100%; max-width:340px; margin:0 auto;
+  filter:drop-shadow(0 26px 40px rgba(18,35,63,.22));
+  transition:transform .7s ease}
+.pieza figure:hover img{transform:scale(1.04)}
+.pieza figcaption{text-align:center}
+/* En escritorio, el texto de los 6 objetivos se lee ~16-17% más grande. */
+@media (min-width:1024px){
+  .objetivo p{font-size:1.2rem}
+}
+
+/* ---------- Visión y misión ----------
+   Las dos vuelven a estar dentro de una sola sección .vm, con fondo
+   compartido: foto del mural con capa marino al 82% (igual en celular
+   y en escritorio); apiladas en celular, en dos columnas iguales en
+   escritorio (ver breakpoint 1024px más abajo). */
+.vm{
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/mural.webp');
+  background-size:cover; background-position:center;
+}
+.vm-grid{display:block}
+/* Cada texto va en su propia tarjeta blanca (70% de opacidad, esquinas
+   rectas) sobre la foto del mural, para que el texto quede legible en
+   marino en vez de blanco sobre foto. */
+.vm-col{
+  color:#fff; text-align:center;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.24);
+  border-radius:2px; padding:30px 26px 32px;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+}
+.vm-col:hover{transform:translateY(-4px); box-shadow:0 22px 44px -30px rgba(0,0,0,.5); border-color:#fff}
+.vm-col + .vm-col{margin-top:clamp(40px,6vw,64px)}
+/* Título con un símbolo a cada lado, los tres centrados verticalmente. */
+.titulo-vm{
+  display:block; text-align:center;
+  font-family:var(--serif); text-transform:uppercase; color:#fff;
+  font-size:clamp(1.35rem,3.6vw,2.2rem);
+  margin:0; font-weight:400; line-height:1.25;
+}
+.simbolo-vm{
+  display:block; width:22px; height:22px; object-fit:contain;
+  filter:brightness(0) invert(72%) sepia(1) hue-rotate(165deg) saturate(1.8) brightness(.88);
+  margin:-4px auto 18px;
+}
+@media (min-width:768px){
+  .simbolo-vm{width:28px; height:28px}
+}
+.texto-vm{margin:0 auto; max-width:62ch; font-size:clamp(1.05rem,1.7vw,1.32rem);
+  line-height:1.62; color:#fff; text-align:justify; hyphens:auto}
+@media (min-width:1024px){
+  .vm-grid{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:stretch}
+  .vm-col + .vm-col{margin-top:0}
+}
+
+/* ---------- Proyectos ---------- */
+.proyectos{display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(22px,3vw,34px)}
+.proyecto{border:1px solid var(--linea); border-radius:2px; overflow:hidden; background:#fff;
+  display:flex; flex-direction:column; transition:transform .35s,box-shadow .35s}
+.proyecto:hover{transform:translateY(-5px); box-shadow:0 30px 55px -38px rgba(18,35,63,.6)}
+.proyecto .foto{aspect-ratio:16/10; overflow:hidden; background:var(--celeste)}
+.proyecto .foto img{width:100%; height:100%; object-fit:cover; transition:transform .7s ease}
+.proyecto:hover .foto img{transform:scale(1.06)}
+.proyecto figcaption{padding:0 26px}
+.proyecto .txt{padding:22px 26px 30px}
+.proyecto h3{margin:0 0 12px}
+.proyecto ul{margin:0; padding-left:18px; color:var(--tinta-suave);
+  font-size:.99rem; line-height:1.6}
+.proyecto li{margin-bottom:7px}
+
+/* ---------- CORRECCIÓN 15 y PARTE 2.8 · Sitios de intervención ---------- */
+.sitios{display:grid; grid-template-columns:repeat(2,1fr);
+  gap:clamp(28px,4vw,56px); margin-top:clamp(34px,4vw,56px)}
+.sitios h3{margin-bottom:18px; padding-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.22)}
+.sitios ol{margin:0 0 clamp(26px,3vw,38px); padding-left:22px; color:#c9d8e8}
+/* Cada columna es una columna flex de alto igual (por el grid de arriba);
+   así la pieza de cada capítulo queda pegada abajo y las dos fotos quedan
+   alineadas a la misma altura, aunque las listas tengan largos distintos. */
+.sitios .rv{display:flex; flex-direction:column}
+.sitios li{margin-bottom:14px; line-height:1.55}
+.sitios li b{color:#fff; font-weight:400}
+.sitios li span{display:block; font-family:var(--sans); font-size:.79rem;
+  color:#8fa9c6; margin-top:3px}
+/* Todas las imágenes de la sección, del mismo tamaño: caja de alto fijo
+   y 'contain' para que ninguna se recorte ni se deforme. */
+.sitios-figuras{display:grid; grid-template-columns:repeat(2,1fr);
+  gap:clamp(28px,4vw,56px); margin-top:clamp(34px,4vw,56px)}
+.sitios-figuras figure{display:flex; flex-direction:column; height:100%}
+.sitios-figuras .caja{height:clamp(180px,20vw,250px); display:flex;
+  align-items:center; justify-content:center}
+.sitios-figuras .caja img{max-height:100%; max-width:100%; width:auto;
+  object-fit:contain; filter:drop-shadow(0 20px 34px rgba(18,35,63,.45));
+  transition:transform .7s ease}
+.sitios-figuras figure:hover img{transform:scale(1.04)}
+.sitios-figuras figcaption{margin-top:auto; padding-top:12px; text-align:center}
+/* Cada pieza va al final del texto de su propio capítulo, pegada al fondo
+   de su columna (ver .sitios .rv arriba) para quedar a la misma altura que
+   la del otro capítulo. Ancho fijo e igual para las dos, alto libre (las
+   dos fotos son casi cuadradas) para que nunca se recorten. */
+.figura-capitulo{margin-top:auto}
+/* Tamaño +27% en las dos vistas respecto a como estaban antes. */
+.figura-capitulo .caja{width:clamp(190px,53%,330px); max-width:100%; margin:0 auto}
+/* En escritorio (desde donde Sitios de intervención pasa a dos columnas)
+   las dos fotos se ven bastante más grandes que su tamaño de celular. */
+@media (min-width:901px){
+  .figura-capitulo .caja{width:clamp(256px,72%,446px)}
+}
+.figura-capitulo .caja img{width:100%; height:auto; display:block;
+  filter:drop-shadow(0 20px 34px rgba(18,35,63,.45));
+  transition:transform .7s ease}
+.figura-capitulo:hover .caja img{transform:scale(1.04)}
+.figura-capitulo:hover .caja-spondylus img{transform:scale(1.04)}
+@media (min-width:768px){.caja-spondylus img{max-width:72%; margin:0 auto}}
+/* Reserva el alto de hasta 2 líneas de pie de foto: como los dos pies
+   tienen distinto largo, sin esto la foto con el pie más corto queda más
+   abajo que la otra y se pierde la alineación. */
+.figura-capitulo figcaption{text-align:center; min-height:3em}
+
+/* ---------- Líneas de fomento ---------- */
+.fomento-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,60px)}
+.bloque-lista h3{font-size:1.28rem; margin-bottom:16px}
+.bloque-lista ul{margin:0; padding-left:19px; color:var(--tinta-suave); line-height:1.62}
+.bloque-lista li{margin-bottom:10px}
+.caja-apoyo{background:var(--marino); color:#e8eff7; border-radius:2px;
+  padding:clamp(30px,4vw,44px); margin-top:clamp(36px,4vw,56px)}
+.caja-apoyo h3{color:#fff; margin-bottom:14px}
+.caja-apoyo p{color:#c4d4e6; max-width:62ch; margin:0 0 24px}
+
+/* ---------- CORRECCIÓN 19 y PARTE 2.10 · Sitios de interés ----------
+   Fondo con foto de las montañas y capa marino al 82%: texto en blanco. */
+#enlaces{
+  position:relative; color:#fff;
+  background-image:linear-gradient(rgba(18,35,63,.82),rgba(18,35,63,.82)), url('img/img-fondo.jpg');
+  background-size:cover; background-position:center;
+}
+#enlaces .kicker{color:var(--azul-claro)}
+#enlaces h2{color:#fff}
+.aliados{display:grid; grid-template-columns:repeat(4,1fr);
+  gap:clamp(20px,3vw,30px); margin-top:clamp(28px,3vw,40px)}
+.aliado{border:1px solid rgba(255,255,255,.24); border-radius:2px; background:rgba(255,255,255,.07);
+  padding:26px 20px; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; text-align:center; min-height:190px;
+  text-decoration:none; transition:border-color .3s,transform .3s}
+a.aliado:hover{border-color:#fff; transform:translateY(-3px)}
+/* Los logos, con su propio fondo blanco, van enmarcados en una tarjeta
+   blanca con esquinas redondeadas y sombra: se leen sus colores
+   originales en vez de forzarlos a blanco. */
+.aliado .marco{height:96px; display:flex; align-items:center; justify-content:center;
+  margin-bottom:16px; background:#fff; border-radius:12px; padding:12px;
+  box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.aliado .marco img{max-height:100%; max-width:100%; width:auto; object-fit:contain}
+.aliado .nombre{font-family:var(--sans); font-size:.8rem; letter-spacing:.05em;
+  color:#dce7f3; line-height:1.45}
+.aliado.solo-texto .marco{display:none}
+.aliado.solo-texto .titulo{font-family:var(--serif); font-size:1.15rem;
+  color:#fff; margin-bottom:8px; line-height:1.25}
+
+/* ---------- CORRECCIÓN 20 · Directorio ---------- */
+.equipo{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(24px,3vw,38px)}
+/* Los tres retratos en 3:4, recortados desde arriba.
+   --zoom ajusta cada foto por separado: la de Iliana es un recorte con fondo
+   transparente cuya figura termina al 77 % del archivo, así que se amplía
+   para que llegue al borde inferior y no quede flotando. */
+.persona .retrato{aspect-ratio:3/4; overflow:hidden;
+  border-radius:2px; position:relative}
+.persona .retrato img{width:100%; height:100%; object-fit:cover;
+  object-position:top center; transform:scale(var(--zoom,1));
+  transform-origin:top center; transition:transform .3s ease}
+.persona .retrato:hover img{transform:scale(calc(var(--zoom,1) * 1.03))}
+.persona.recorte-transparente{--zoom:1.30}
+.persona .vacio{position:absolute; inset:0; display:flex; align-items:center;
+  justify-content:center; text-align:center; font-family:var(--sans); font-size:.74rem;
+  letter-spacing:.1em; color:var(--azul); text-transform:uppercase; padding:20px}
+.persona h3{margin:20px 0 4px; font-size:1.22rem}
+.persona .cargo{font-family:var(--sans); font-size:.73rem; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--azul); font-weight:600; line-height:1.5}
+.persona .bio{font-size:.96rem; color:var(--tinta-suave); line-height:1.6; margin:14px 0 0}
+/* Colaboradores: mismas tarjetas del directorio, pero sin foto. */
+.persona.sin-foto{text-align:center; background:#fff; border:1px solid var(--linea);
+  border-radius:2px; padding:30px 24px}
+.persona.sin-foto h3{margin:0 0 6px}
+.persona.sin-foto .cargo{margin:0}
+/* Variante: nombres en columna en escritorio, fila en celular */
+.equipo-fila{
+  display:flex; flex-wrap:wrap; gap:20px 40px;
+  justify-content:center; align-items:flex-start; max-width:100%
+}
+/* En celular las dos instituciones van en dos líneas y sin separador;
+   en escritorio van seguidas y el punto medio las separa. */
+.sep-desk{display:none}
+@media (min-width:768px){
+  .equipo-fila{flex-direction:column; flex-wrap:nowrap; align-items:center; gap:32px}
+  .br-mob{display:none}
+  .sep-desk{display:inline}
+}
+.equipo-fila .persona.sin-foto{
+  background:none; border:none; border-radius:0; padding:0;
+  text-align:center; flex:0 0 auto;
+}
+.equipo-fila .persona.sin-foto h3{font-size:1.1rem; margin:0 0 4px}
+.equipo-fila .persona.sin-foto .cargo{
+  font-family:var(--sans); font-size:.73rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--tinta-suave); margin:0; line-height:1.5
+}
+
+/* ---------- CORRECCIÓN 21 · Contacto ---------- */
+.contacto-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(30px,5vw,64px)}
+.correos{list-style:none; margin:24px 0 0; padding:0}
+.correos li{padding:16px 0; border-top:1px solid var(--linea)}
+.correos .rol{font-family:var(--sans); font-size:.7rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--tinta-suave); display:block; margin-bottom:4px}
+.correos a{color:var(--azul); text-decoration:none}
+.correos a:hover{text-decoration:underline}
+form label{display:block; font-family:var(--sans); font-size:.72rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--tinta-suave); margin-bottom:7px; font-weight:600}
+form input,form textarea{width:100%; font-family:var(--serif); font-size:1rem;
+  color:var(--tinta); padding:13px 15px; border:1px solid var(--linea);
+  border-radius:2px; background:#fff; margin-bottom:20px}
+form input:focus,form textarea:focus{outline:none; border-color:var(--azul)}
+form textarea{min-height:140px; resize:vertical}
+.aviso-form{font-family:var(--sans); font-size:.82rem; color:var(--tinta-suave); margin-top:14px}
+
+/* ---------- PARTE 2.11 · Iconos de redes en fila ----------
+   Todos del mismo tamaño, del mismo color y con espaciado parejo.
+   Los archivos ya vienen así: los oscuros son azul marino, los
+   "blanco" son blancos puros. */
+.redes{display:flex; align-items:center; gap:clamp(16px,2.2vw,26px); flex-wrap:wrap}
+.redes a{display:flex; align-items:center; justify-content:center;
+  width:30px; height:30px}
+.redes img{width:100%; height:100%; object-fit:contain; opacity:.85;
+  transition:opacity .25s,transform .25s}
+.redes a:hover img{opacity:1; transform:translateY(-2px)}
+.redes.grande a{width:34px; height:34px}
+.pie .redes{margin-top:22px}
+
+/* ---------- Ensayo SUR ---------- */
+.apoyar{background:var(--marino); color:#e8eff7}
+.apoyar h2{color:#fff}
+/* La portada del libro va arriba y el texto debajo, justificado. */
+.apoyar-grid{display:flex; flex-direction:column; align-items:center;
+  gap:clamp(22px,3vw,34px)}
+.apoyar-grid img{border-radius:2px; box-shadow:0 30px 60px -34px rgba(0,0,0,.7);
+  transition:transform .7s ease}
+.apoyar-grid figure:hover img{transform:scale(1.03)}
+.apoyar-grid .texto{max-width:72ch}
+.apoyar p{color:#c4d4e6; margin:0}
+.apoyar .texto p{text-align:justify; hyphens:auto; font-size:.98rem; font-weight:400; max-width:50ch}
+.apoyar .kicker{margin-bottom:12px}
+.apoyar h2 + p{margin-top:18px}
+.portada-int + .apoyar{padding-top:clamp(26px,3vw,40px)}
+.portada-donativos h1{font-size:clamp(1.7rem,4vw,2.9rem); line-height:1.16;
+  letter-spacing:.02em; margin-bottom:0}
+/* En computadora, toda la franja azul —rótulo, título y portada del libro—
+   entra en la pantalla sin tener que desplazar. */
+@media (max-width:900px){
+  .portada-donativos .apoyar-grid{margin-top:clamp(28px,5vw,42px)}
+}
+@media (min-width:901px){
+  /* 120 px es lo que ocupan juntas la barra azul superior y la cabecera.
+     El tope de la portada del libro deja sitio para el título y los rellenos. */
+  .portada-donativos{min-height:calc(100dvh - 128px); display:flex; align-items:center;
+    padding-top:clamp(20px,2.5vw,34px); padding-bottom:clamp(20px,2.5vw,34px)}
+  .portada-donativos .apoyar-grid{margin-top:clamp(8px,1.2vw,14px)}
+  /* El tope deja sitio para el título, la portada Y el texto de debajo,
+     que es lo que hace falta para que la franja entre entera en pantalla. */
+  .portada-donativos .apoyar-grid img{max-height:calc(100dvh - 476px);
+    min-height:180px; width:auto}
+}
+
+/* ---------- Paquetes de aporte ---------- */
+.paquetes{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  margin-top:clamp(28px,3vw,40px); align-items:stretch}
+.paquete{border:1px solid var(--linea); border-radius:2px; background:#fff;
+  padding:30px 26px 28px; display:flex; flex-direction:column;
+  opacity:0; transform:scale(.95);
+  transition:opacity .7s ease,transform .7s ease,box-shadow .3s ease}
+.paquete.paquete-in{opacity:1; transform:none}
+/* Hover: sombra suave y zoom leve. El "transform .3s" solo se declara
+   aquí (al entrar con el cursor); al salir vuelve con la transición de
+   .7s de arriba, que ya cubre transform con holgura de sobra. */
+.paquete.paquete-in:hover{
+  transform:scale(1.03); box-shadow:0 8px 24px rgba(0,0,0,.12);
+  transition:opacity .7s ease,transform .3s ease,box-shadow .3s ease;
+}
+@media (prefers-reduced-motion:reduce){
+  .paquete{opacity:1; transform:none; transition:none}
+  .paquete.paquete-in:hover{transform:none}
+}
+.paquete.destacado{border-color:var(--azul-claro);
+  box-shadow:0 26px 50px -38px rgba(18,35,63,.55)}
+/* El número y el título del paquete van en la misma línea. */
+/* Número, título y precio en una sola línea y centrados como grupo. El
+   tamaño se declara aquí y lo heredan el h3 y el precio, para que los dos
+   midan siempre lo mismo. */
+.paquete .cab-paquete{display:flex; align-items:center; justify-content:center;
+  gap:8px; margin:0 0 14px; font-size:clamp(11px,3.5vw,16px)}
+/* El número es el mismo dibujo que en Objetivos estratégicos, pero aquí va
+   como máscara en vez de <img>: el archivo es un trazo plano (#404040)
+   sobre transparente, así que recortarlo sobre un fondo de color permite
+   teñirlo con el color exacto de cada paquete, cosa que una <img> no
+   admite. El color lo hereda de `currentColor` (ver nth-child más abajo).
+   Las rutas van en esta hoja, no en una variable del HTML: dentro de una
+   custom property la url() se resolvería contra este archivo igualmente y
+   acabaría duplicando el /assets/. */
+/* `align-items:center` centra la caja del número contra la caja de línea
+   del título, que reserva sitio para las letras con rabito (p, g, j). Como
+   el título va en mayúsculas, su tinta ocupa solo la franja alta y el
+   número quedaba 0.195em por debajo del centro óptico de las versales. Se
+   sube esa cantidad exacta, medida sobre la línea base real. */
+.paquete .n{width:.9em; height:.9em; display:block; flex:0 0 auto;
+  transform:translateY(-.195em);
+  background-color:currentColor;
+  -webkit-mask-position:center; mask-position:center;
+  -webkit-mask-size:contain; mask-size:contain;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat}
+/* Una sola línea en los tres paquetes. En celular las tarjetas van en una
+   columna y sobra sitio, así que el título mantiene su tamaño holgado.
+   Los límites van en px, no en rem: el ancho de la tarjeta no depende del
+   tamaño de fuente base del navegador, así que atarlos a rem haría que el
+   título se saliera justo en quienes lo tienen más grande. */
+.paquete h3{font-size:inherit; margin:0; text-transform:uppercase;
+  letter-spacing:.02em; text-align:center; white-space:nowrap}
+/* En escritorio son tres columnas y manda la fila más larga ("2 PAQUETE
+   INVESTIGADOR $50"): el tamaño acompaña al ancho, pero se detiene porque
+   pasados los 1180px el contenedor deja de ensancharse y la tarjeta ya no
+   gana sitio. */
+@media (min-width:901px){
+  .paquete .cab-paquete{font-size:clamp(11px,1.25vw,16px)}
+}
+/* Franja estrecha con tres columnas ya activas: las tarjetas ceden algo
+   de relleno lateral para que el título más largo siga entrando entero. */
+@media (min-width:901px) and (max-width:1100px){
+  .paquete{padding-left:18px; padding-right:18px}
+}
+/* Cada paquete tiene su color, y el precio lo repite para que se lean
+   como una sola unidad. */
+.paquetes article:nth-child(1) h3,
+.paquetes article:nth-child(1) .precio,
+.paquetes article:nth-child(1) .n{color:#4a4a4a}
+.paquetes article:nth-child(2) h3,
+.paquetes article:nth-child(2) .precio,
+.paquetes article:nth-child(2) .n{color:#5C8C6E}
+.paquetes article:nth-child(3) h3,
+.paquetes article:nth-child(3) .precio,
+.paquetes article:nth-child(3) .n{color:#7B5EA7}
+.paquetes article:nth-child(1) .n{
+  -webkit-mask-image:url('img/numero1-objetivos-estrategicos.webp');
+  mask-image:url('img/numero1-objetivos-estrategicos.webp')}
+.paquetes article:nth-child(2) .n{
+  -webkit-mask-image:url('img/numero2-objetivos-estrategicos.webp');
+  mask-image:url('img/numero2-objetivos-estrategicos.webp')}
+.paquetes article:nth-child(3) .n{
+  -webkit-mask-image:url('img/numero3-objetivos-estrategicos.webp');
+  mask-image:url('img/numero3-objetivos-estrategicos.webp')}
+/* El precio va en la misma línea que el número y el título, al mismo
+   tamaño, y la fila entera queda centrada por el justify-content de
+   .cab-paquete.
+
+   Sorts Mill Goudy trae cifras elzevirianas por defecto: el 0 y el 2 van a
+   la altura de la x mientras el 5 y el 7 bajan de la línea base, así que
+   $25, $50 y $75 se veían desparejos. `lining-nums` pide las cifras de
+   caja alta, todas a la misma altura. El font-feature-settings queda de
+   respaldo para navegadores que no entiendan la propiedad moderna. */
+.paquete .precio{font-family:var(--serif); font-size:1.2em;
+  line-height:1; letter-spacing:0; text-transform:none; font-weight:bold;
+  font-variant-numeric:lining-nums; font-feature-settings:"lnum" 1;
+  white-space:nowrap; flex:0 0 auto; margin:0}
+.paquete .incluye{font-family:var(--sans); font-size:.72rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--azul); margin:0 0 10px; font-weight:600}
+.paquete ul{margin:0 0 22px; padding-left:18px; color:var(--tinta-suave);
+  font-size:.97rem; line-height:1.6}
+.paquete li{margin-bottom:9px}
+.paquete .pagos{margin-top:auto; display:flex; flex-direction:column; gap:9px}
+.paquete .pagos .btn{width:100%}
+.nota-pago{font-family:var(--sans); font-size:.72rem; color:var(--tinta-suave);
+  text-align:center; margin:10px 0 0}
+/* La línea de aporte libre va más discreta que las tarjetas. */
+.aporte-libre{margin-top:clamp(30px,4vw,44px); padding-top:26px;
+  border-top:1px solid var(--linea); display:flex; gap:20px; align-items:center;
+  flex-wrap:wrap; justify-content:space-between}
+.aporte-libre p{margin:0; color:var(--tinta-suave); font-size:.98rem; max-width:54ch}
+.aporte-libre .pagos{display:flex; gap:10px; flex-wrap:wrap}
+
+/* ---------- Descargas y enlaces ---------- */
+.recursos{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,60px)}
+/* Los tres recursos (presentación, programa, YouTube) lado a lado en
+   escritorio; en celular caen en una sola columna, en el mismo orden
+   del documento (presentación → programa → YouTube). */
+.recursos-3{grid-template-columns:repeat(3,1fr)}
+.recurso{display:flex; flex-direction:column}
+.recurso-fondo{background:rgba(47,92,143,.05); padding:2rem; border-radius:6px; text-align:center}
+.recurso h3{font-size:1.25rem; margin-bottom:12px}
+.recurso p{color:var(--tinta-suave); margin:0 0 20px}
+.recurso .btn{margin-top:auto; width:100%; white-space:nowrap}
+/* Separador entre los 3 recursos: solo en celular (en escritorio ya van en
+   columnas y no hace falta). En celular el grid deja de sumar gap para que
+   la única separación sea la del <hr> (2rem arriba y abajo). */
+.sep-recurso{display:none}
+@media (max-width:768px){
+  .sep-recurso{display:block; width:100%; height:0; border:0;
+    border-top:0.5px solid rgba(47,92,143,.3); margin:2rem 0}
+  .recursos-3{gap:0}
+  .recurso-fondo{padding:1.25rem}
+}
+
+/* ---------- Bloques pendientes ---------- */
+.pendiente{border:1px dashed var(--azul-claro); border-radius:2px; padding:28px 26px;
+  background:var(--celeste-2); color:var(--tinta-suave)}
+.pendiente p{margin:0}
+.pendiente .et{font-family:var(--sans); font-size:.68rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--azul); font-weight:600;
+  display:block; margin-bottom:10px}
+
+/* ---------- Franjas ---------- */
+.franja{background:var(--marino); padding-bottom:14px}
+.franja .marco{overflow:hidden; line-height:0}
+.franja img{width:100%; height:clamp(150px,18vw,230px); object-fit:cover; opacity:.92}
+.franja figcaption{padding:12px clamp(18px,4vw,26px) 0; max-width:var(--ancho);
+  margin:0 auto; text-align:center}
+/* Las franjas de Bandurria van pegadas al pie, que también es marino, así
+   que su fondo oscuro encaja. La de Yumbos queda entre dos secciones
+   claras: ahí la banda marino desentona y el pie de foto debe leerse como
+   los demás del sitio. */
+.franja.franja-clara{background:transparent}
+.franja.franja-clara figcaption{color:var(--tinta-suave)}
+
+/* ---------- CORRECCIÓN 23 · Pie ---------- */
+.pie{background:var(--marino); color:#a9bdd6;
+  padding:clamp(48px,6vw,74px) 0 32px; font-size:.95rem}
+.pie-grid{display:grid; grid-template-columns:1.2fr 1fr 1fr;
+  gap:clamp(28px,4vw,54px); align-items:start}
+.pie img.logo{width:250px; margin-bottom:18px}
+.pie h4{font-family:var(--sans); font-size:.7rem; letter-spacing:.16em;
+  text-transform:uppercase; color:#fff; margin:0 0 16px; font-weight:600}
+.pie a{color:#cddcec; text-decoration:none}
+.pie a:hover{color:#fff}
+.pie ul{list-style:none; margin:0; padding:0}
+.pie li{margin-bottom:9px}
+.idea{font-family:var(--sans); font-size:.76rem; letter-spacing:.06em;
+  color:#8fa9c6; margin:24px 0 10px}
+.logo-2{width:170px; opacity:.95; transition:opacity .3s ease}
+a:hover .logo-2{opacity:.6}
+.pie .legal{margin-top:clamp(34px,4vw,52px); padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.14);
+  font-family:var(--sans); font-size:.76rem; color:#8299b6; display:flex;
+  justify-content:space-between; gap:18px; flex-wrap:wrap}
+.pie .legal a{color:inherit; text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.22)}
+.pie .legal a:hover{color:#fff; border-bottom-color:rgba(255,255,255,.6)}
+
+/* ---------- Página de gracias ----------
+   Portada de fondo claro: la cabecera lleva .solida en el HTML, porque
+   su variante transparente pinta los títulos en blanco. */
+.portada-int.portada-clara{background:var(--blanco); color:var(--tinta)}
+.portada-clara .kicker{color:var(--azul)}
+.portada-clara p{color:var(--tinta-suave)}
+.gracias{text-align:center; max-width:62ch; margin:0 auto}
+/* .portada-int limita h1 a 22ch y los párrafos a 60ch: sin margen
+   automático esas cajas quedan pegadas a la izquierda del bloque. */
+.gracias h1,.gracias p{margin-inline:auto}
+.gracias .sello{width:64px; height:64px; border:1px solid var(--azul);
+  color:var(--azul); border-radius:50%; display:flex; align-items:center;
+  justify-content:center; margin:0 auto 26px}
+.gracias .sello svg{width:30px; height:30px}
+.gracias .kicker{white-space:normal}
+.gracias h1{font-size:clamp(1.6rem,3.4vw,2.6rem); line-height:1.18; margin-bottom:18px}
+.gracias .acciones{justify-content:center}
+.gracias .peso{font-family:var(--sans); font-size:.76rem; letter-spacing:.08em;
+  color:var(--tinta-suave); margin-top:12px}
+.gracias .ayuda{font-size:.95rem; color:var(--tinta-suave); margin-top:28px}
+.gracias .ayuda a{color:var(--azul)}
+
+/* ---------- Texto legal ---------- */
+.legal-texto{max-width:68ch}
+.legal-texto h3{margin:40px 0 12px}
+.legal-texto p{color:var(--tinta-suave); margin:0 0 16px}
+.legal-texto ul{color:var(--tinta-suave); padding-left:20px; margin:0 0 16px}
+.legal-texto li{margin-bottom:9px}
+.legal-texto a{color:var(--azul)}
+.legal-fecha{font-family:var(--sans); font-size:.78rem; letter-spacing:.04em;
+  color:var(--tinta-suave); margin-top:6px}
+
+/* ---------- Animación de entrada ---------- */
+.rv{opacity:0; transform:translateY(22px); transition:opacity .8s ease,transform .8s ease}
+.rv.on{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1; transform:none; transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width:1100px){
+  .aliados{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  body{font-size:18px}
+  .dos-col,.valores,.proyectos,.sitios,.fomento-grid,.equipo,
+  .contacto-grid,.pie-grid,.sitios-figuras,.paquetes,.apoyar-grid,
+  .recursos{grid-template-columns:1fr}
+  .apoyar-grid img{max-width:300px; margin:0 auto}
+  .aporte-libre{flex-direction:column; align-items:flex-start}
+  .valores{gap:18px}
+  .sitios > div + div{margin-top:70px}
+  .equipo{max-width:380px}
+  .portada{min-height:clamp(400px,calc(74vh - var(--cab)),540px)}
+  .pie-grid{gap:clamp(24px,5vw,34px)}
+  /* PARTE 2.7 · en celular la barra azul quiebra en tres líneas centradas */
+  .barra-apoyo .wrap{flex-direction:column; gap:10px}
+  .barra-apoyo .frase{display:block}
+  .barra-apoyo .frase + .frase{margin-left:0; margin-top:2px}
+}
+@media (max-width:820px){
+  .bloque,.bloque.invertido{grid-template-columns:1fr}
+  .bloque.invertido .pieza{order:0}
+  .pieza img{max-width:240px}
+  .objetivo p{text-align:left}
+}
+/* En celular, cada pieza de la Colección DALMAU baja justo después
+   del bloque de texto al que pertenece (la 1.ª tras el objetivo 3,
+   la 2.ª tras el objetivo 6), en vez de quedar juntas al final. */
+@media (max-width:767.98px){
+  .objetivos-zona{display:flex; flex-direction:column; gap:clamp(26px,5vw,42px)}
+  .objetivos-zona .bloque{display:contents}
+  .objetivos-zona .bloque .objetivos-txt{order:1}
+  /* Esta regla tiene que ganarle a .bloque.invertido .pieza{order:0} */
+  .objetivos-zona .bloque:nth-of-type(1) .pieza{order:2}
+  .objetivos-zona .bloque:nth-of-type(2) .objetivos-txt{order:3}
+  .objetivos-zona .bloque:nth-of-type(2) .pieza{order:4}
+}
+/* Botones y texto centrados en celular */
+@media (max-width:767.98px){
+  .caja-apoyo .btn,.recurso .btn{display:flex; margin-left:auto; margin-right:auto}
+  .recursos{text-align:center}
+  .caja-apoyo{text-align:center}
+  .simbolo-vm{width:18px; height:18px}
+  /* Colaboradores: columna vertical en celular */
+  .equipo-fila{gap:28px; flex-direction:column; align-items:center}
+  .equipo-fila .persona.sin-foto{width:100%; max-width:280px}
+}
+@media (max-width:560px){
+  :root{--logo:40px; --cab:58px}
+  .acciones .btn{width:100%}
+  .aliados{grid-template-columns:1fr}
+  .portada .wrap{padding-top:22px; padding-bottom:34px}
+}
+
+/* =====================================================================
+   ESCRITORIO · min-width 1024px
+   Tamaño de texto base, cabecera transparente-a-sólida y submenú.
+   ===================================================================== */
+@media (min-width:1024px){
+  /* ---------- Tamaño de texto base, un 10% mayor ---------- */
+  html{font-size:17.6px}
+  body{font-size:20.9px}
+
+  /* ---------- Logo más grande ---------- */
+  :root{--logo:58px}
+
+  /* ---------- Cabecera transparente sobre el tope, sólida al bajar ----------
+     En celular la cabecera se queda tal como estaba (sticky, blanca).
+     Aquí arranca transparente y flota sobre el contenido.
+
+     Va en `sticky`, no en `fixed` con un `top` fijo: la barra de apoyo no
+     tiene una altura constante (60px en una línea, 103px cuando el texto
+     quiebra en dos, cerca de los 1024px), así que cualquier constante la
+     dejaría descuadrada y el logo asomaría por encima de la franja azul.
+     En `sticky` la cabecera se coloca sola justo debajo de la barra, mida
+     lo que mida, y se ancla arriba cuando la barra termina de salir.
+     El margen inferior negativo cancela su altura en el flujo, para que
+     siga flotando sobre el contenido en vez de empujarlo hacia abajo. */
+  .cabecera{
+    position:sticky; top:0; margin-bottom:calc(-1 * var(--cab));
+    background:transparent; border-bottom:none; backdrop-filter:none; box-shadow:none;
+    --cab-color:#fff;
+    transition:background-color .35s ease,box-shadow .35s ease,border-color .35s ease;
+  }
+  /* Tres activaciones independientes para el estado sólido: pasar el
+     cursor sobre la franja (:hover, se revierte solo al quitar el
+     cursor), el scroll (.fija, la pone menu.js) y .solida, fija en el
+     HTML de las páginas de fondo claro, donde el texto blanco de la
+     cabecera transparente sería invisible. Cualquiera de las tres
+     alcanza para el fondo blanco, el logo oscuro y el texto marino. */
+  .cabecera.fija,
+  .cabecera.solida,
+  .cabecera:hover{
+    background:rgba(255,255,255,.97); backdrop-filter:saturate(160%) blur(9px);
+    box-shadow:0 2px 12px rgba(0,0,0,.08); --cab-color:var(--marino);
+  }
+  /* El anclaje arriba lo hace `sticky` por sí solo; .fija ya solo cambia
+     el color (la pone menu.js cuando la barra de apoyo termina de salir). */
+  .marca .logo-claro{opacity:1}
+  .marca .logo-oscuro{opacity:0}
+  .cabecera.fija .marca .logo-claro,
+  .cabecera.solida .marca .logo-claro,
+  .cabecera:hover .marca .logo-claro{opacity:0}
+  .cabecera.fija .marca .logo-oscuro,
+  .cabecera.solida .marca .logo-oscuro,
+  .cabecera:hover .marca .logo-oscuro{opacity:1}
+  /* La cabecera ya no empuja el contenido (quedó "fija"/flotante):
+     las portadas cortas de las páginas interiores dejan sitio arriba
+     para que la cabecera transparente no tape el rótulo ni el título.
+     110px es un colchón fijo y generoso que cubre de sobra tanto la
+     cabecera normal como la .compacta (ambas más altas ahora, ver
+     abajo), sin tener que perseguir el valor exacto de --cab de cada
+     una (esos elementos no son descendientes de .cabecera y no ven su
+     --cab local). */
+  .portada-int{padding-top:calc(clamp(40px,5.5vw,70px) + 28px)}
+  .apoyar.portada-donativos{padding-top:calc(clamp(20px,2.5vw,34px) + 110px)}
+  /* Franja delgada y, sobre todo, de altura CONSTANTE en los tres
+     estados. Si el hover la encogiera, su borde inferior se alejaría del
+     cursor, el hover se cancelaría, volvería a crecer y quedaría otra vez
+     bajo el cursor: un bucle que reinicia sin parar el fundido entre los
+     dos logos y se ve como texto duplicado. Altura fija = sin bucle. */
+  :root{--cab:68px}
+  /* El hero de index.html baja su contenido para no quedar pegado a la
+     cabecera transparente flotante; el hero crece con el padding
+     (flex+min-height, no se recorta). En celular queda igual. */
+  .portada .wrap{padding-top:clamp(96px,11vw,150px)}
+
+  /* ---------- Submenú desplegable ---------- */
+  .nav-desk{display:flex; align-items:stretch; gap:clamp(18px,2.2vw,32px); height:100%}
+  .nav-item{position:relative; display:flex; align-items:center}
+  .nav-titulo{
+    font-family:var(--serif); font-size:.76rem; letter-spacing:.1em; font-weight:600;
+    text-transform:uppercase; text-decoration:none; color:var(--cab-color);
+    position:relative; padding:8px 1px; transition:color .35s ease;
+  }
+  .nav-titulo::after{content:''; position:absolute; left:0; right:0; bottom:-3px;
+    height:3px; background:var(--marino); transform:scaleX(0); transform-origin:center;
+    transition:transform .35s ease}
+  .nav-titulo:hover::after,
+  .nav-titulo:focus-visible::after,
+  .nav-item.abierto-panel .nav-titulo::after,
+  .nav-item:focus-within .nav-titulo::after{transform:scaleX(1)}
+  /* Panel: fondo blanco, sombra sutil, sin líneas divisoras entre las
+     subsecciones. Lo abre menu.js (clase .abierto-panel) con 250ms de
+     margen al salir, para que no se cierre al cruzar el espacio entre
+     el título y el panel; :focus-within queda de respaldo para
+     teclado/sin JS. */
+  .nav-panel{
+    position:absolute; top:100%; left:50%; transform:translate(-50%,8px);
+    min-width:262px; background:#fff; border-radius:4px;
+    box-shadow:0 22px 44px -20px rgba(18,35,63,.35); padding:10px;
+    opacity:0; visibility:hidden; pointer-events:none; margin-top:14px;
+    transition:opacity .22s ease,transform .22s ease,visibility .22s;
+  }
+  .nav-item.abierto-panel .nav-panel,
+  .nav-item:focus-within .nav-panel{
+    opacity:1; visibility:visible; pointer-events:auto; transform:translate(-50%,0);
+  }
+  .nav-panel a{
+    position:relative; display:block; padding:11px 12px; border-radius:2px;
+    text-decoration:none; font-family:var(--sans); font-size:.86rem;
+    color:#3a4452; white-space:nowrap;
+  }
+  .nav-panel a .txt{border-bottom:1px solid transparent; transition:border-color .2s ease}
+  /* Tooltip "Ir a la página": fondo azul medio, texto blanco, aparece
+     debajo del cursor con una punta que señala hacia el texto. */
+  .nav-panel a .ir{
+    position:absolute; top:100%; left:50%; transform:translate(-50%,4px);
+    font-family:var(--sans); font-size:.64rem; letter-spacing:.08em; font-weight:600;
+    text-transform:uppercase; color:#fff; background:var(--azul); border-radius:4px;
+    padding:5px 10px; white-space:nowrap; z-index:1;
+    opacity:0; pointer-events:none;
+    transition:opacity .2s ease,transform .2s ease;
+  }
+  .nav-panel a .ir::before{
+    content:''; position:absolute; bottom:100%; left:50%; transform:translateX(-50%);
+    border:6px solid transparent; border-bottom-color:var(--azul);
+  }
+  .nav-panel a:hover,.nav-panel a:focus-visible{background:var(--celeste-2)}
+  .nav-panel a:hover .txt,.nav-panel a:focus-visible .txt{border-color:#3a4452}
+  .nav-panel a:hover .ir,.nav-panel a:focus-visible .ir{opacity:1; transform:translate(-50%,8px)}
+  .nav-directo{display:flex; align-items:center}
+}
+@media (min-width:1024px) and (prefers-reduced-motion:reduce){
+  .cabecera,.marca img,.btn-menu,.nav-titulo::after,.nav-panel,.nav-panel a .ir{transition:none}
+}
