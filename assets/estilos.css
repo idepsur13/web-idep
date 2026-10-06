@@ -605,7 +605,7 @@ form textarea{min-height:140px; resize:vertical}
    Las rutas van en esta hoja, no en una variable del HTML: dentro de una
    custom property la url() se resolvería contra este archivo igualmente y
    acabaría duplicando el /assets/. */
-.paquete .n{width:18px; height:18px; display:block; flex:0 0 auto;
+.paquete .n{width:.9em; height:.9em; display:block; flex:0 0 auto;
   background-color:currentColor;
   -webkit-mask-position:center; mask-position:center;
   -webkit-mask-size:contain; mask-size:contain;
