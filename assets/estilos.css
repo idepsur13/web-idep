@@ -591,44 +591,21 @@ form textarea{min-height:140px; resize:vertical}
 }
 .paquete.destacado{border-color:var(--azul-claro);
   box-shadow:0 26px 50px -38px rgba(18,35,63,.55)}
-/* El número y el título del paquete van en la misma línea. */
-/* Número, título y precio en una sola línea y centrados como grupo. El
-   tamaño se declara aquí y lo heredan el h3 y el precio, para que los dos
-   midan siempre lo mismo. */
-.paquete .cab-paquete{display:flex; align-items:center; justify-content:center;
-  gap:8px; margin:0 0 14px; font-size:clamp(11px,3.5vw,16px)}
-/* El número es el mismo dibujo que en Objetivos estratégicos, pero aquí va
-   como máscara en vez de <img>: el archivo es un trazo plano (#404040)
-   sobre transparente, así que recortarlo sobre un fondo de color permite
-   teñirlo con el color exacto de cada paquete, cosa que una <img> no
-   admite. El color lo hereda de `currentColor` (ver nth-child más abajo).
-   Las rutas van en esta hoja, no en una variable del HTML: dentro de una
-   custom property la url() se resolvería contra este archivo igualmente y
-   acabaría duplicando el /assets/. */
-/* `align-items:center` centra la caja del número contra la caja de línea
-   del título, que reserva sitio para las letras con rabito (p, g, j). Como
-   el título va en mayúsculas, su tinta ocupa solo la franja alta y el
-   número quedaba 0.195em por debajo del centro óptico de las versales. Se
-   sube esa cantidad exacta, medida sobre la línea base real. */
-.paquete .n{width:.9em; height:.9em; display:block; flex:0 0 auto;
-  transform:translateY(-.195em);
-  background-color:currentColor;
-  -webkit-mask-position:center; mask-position:center;
-  -webkit-mask-size:contain; mask-size:contain;
-  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat}
-/* Una sola línea en los tres paquetes. En celular las tarjetas van en una
-   columna y sobra sitio, así que el título mantiene su tamaño holgado.
+/* Título y precio, cada uno en su línea y centrados. El tamaño se declara
+   aquí y lo heredan los dos, para que midan siempre lo mismo.
    Los límites van en px, no en rem: el ancho de la tarjeta no depende del
    tamaño de fuente base del navegador, así que atarlos a rem haría que el
    título se saliera justo en quienes lo tienen más grande. */
+.paquete .cab-paquete{text-align:center; margin:0 0 16px;
+  font-size:clamp(13px,4.2vw,20px)}
 .paquete h3{font-size:inherit; margin:0; text-transform:uppercase;
-  letter-spacing:.02em; text-align:center; white-space:nowrap}
-/* En escritorio son tres columnas y manda la fila más larga ("2 PAQUETE
-   INVESTIGADOR $50"): el tamaño acompaña al ancho, pero se detiene porque
+  letter-spacing:.02em; white-space:nowrap}
+/* En escritorio son tres columnas y manda el título más largo ("PAQUETE
+   INVESTIGADOR"): el tamaño acompaña al ancho, pero se detiene porque
    pasados los 1180px el contenedor deja de ensancharse y la tarjeta ya no
    gana sitio. */
 @media (min-width:901px){
-  .paquete .cab-paquete{font-size:clamp(11px,1.25vw,16px)}
+  .paquete .cab-paquete{font-size:clamp(14px,1.55vw,20px)}
 }
 /* Franja estrecha con tres columnas ya activas: las tarjetas ceden algo
    de relleno lateral para que el título más largo siga entrando entero. */
@@ -638,36 +615,21 @@ form textarea{min-height:140px; resize:vertical}
 /* Cada paquete tiene su color, y el precio lo repite para que se lean
    como una sola unidad. */
 .paquetes article:nth-child(1) h3,
-.paquetes article:nth-child(1) .precio,
-.paquetes article:nth-child(1) .n{color:#4a4a4a}
+.paquetes article:nth-child(1) .precio{color:#4a4a4a}
 .paquetes article:nth-child(2) h3,
-.paquetes article:nth-child(2) .precio,
-.paquetes article:nth-child(2) .n{color:#5C8C6E}
+.paquetes article:nth-child(2) .precio{color:#5C8C6E}
 .paquetes article:nth-child(3) h3,
-.paquetes article:nth-child(3) .precio,
-.paquetes article:nth-child(3) .n{color:#7B5EA7}
-.paquetes article:nth-child(1) .n{
-  -webkit-mask-image:url('img/numero1-objetivos-estrategicos.webp');
-  mask-image:url('img/numero1-objetivos-estrategicos.webp')}
-.paquetes article:nth-child(2) .n{
-  -webkit-mask-image:url('img/numero2-objetivos-estrategicos.webp');
-  mask-image:url('img/numero2-objetivos-estrategicos.webp')}
-.paquetes article:nth-child(3) .n{
-  -webkit-mask-image:url('img/numero3-objetivos-estrategicos.webp');
-  mask-image:url('img/numero3-objetivos-estrategicos.webp')}
-/* El precio va en la misma línea que el número y el título, al mismo
-   tamaño, y la fila entera queda centrada por el justify-content de
-   .cab-paquete.
-
+.paquetes article:nth-child(3) .precio{color:#7B5EA7}
+/* El precio va bajo el título, con su misma tipografía, tamaño y color.
    Sorts Mill Goudy trae cifras elzevirianas por defecto: el 0 y el 2 van a
    la altura de la x mientras el 5 y el 7 bajan de la línea base, así que
    $25, $50 y $75 se veían desparejos. `lining-nums` pide las cifras de
    caja alta, todas a la misma altura. El font-feature-settings queda de
    respaldo para navegadores que no entiendan la propiedad moderna. */
-.paquete .precio{font-family:var(--serif); font-size:1.2em;
-  line-height:1; letter-spacing:0; text-transform:none; font-weight:bold;
+.paquete .precio{font-family:var(--serif); font-size:inherit;
+  letter-spacing:.02em; text-transform:none; font-weight:400;
   font-variant-numeric:lining-nums; font-feature-settings:"lnum" 1;
-  white-space:nowrap; flex:0 0 auto; margin:0}
+  white-space:nowrap; margin:6px 0 0}
 .paquete .incluye{font-family:var(--sans); font-size:.72rem; letter-spacing:.1em;
   text-transform:uppercase; color:var(--azul); margin:0 0 10px; font-weight:600}
 .paquete ul{margin:0 0 22px; padding-left:18px; color:var(--tinta-suave);
