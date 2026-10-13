@@ -630,6 +630,7 @@ form textarea{min-height:140px; resize:vertical}
   letter-spacing:.02em; text-transform:none; font-weight:400;
   font-variant-numeric:lining-nums; font-feature-settings:"lnum" 1;
   white-space:nowrap; margin:6px 0 0}
+.paquete .n-precio{font-family:'adobe-song-std',sans-serif;font-style:normal;font-weight:300}
 .paquete .incluye{font-family:var(--sans); font-size:.72rem; letter-spacing:.1em;
   text-transform:uppercase; color:var(--azul); margin:0 0 10px; font-weight:600}
 .paquete ul{margin:0 0 22px; padding-left:18px; color:var(--tinta-suave);
